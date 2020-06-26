@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Python_Todo</title>
+    <link rel="stylesheet" href="../static/index.css" />
   </head>
+  <script type="text/javascript" src="../static/index.js" defer></script>
   <body>
-    <form action="/todos/create" method="post">
+    <form id="form">
       <div>
         <label for="description">Create a Todo</label>
       </div>
@@ -17,13 +19,12 @@
           name="description"
           placeholder="Enter a todo"
         />
-
         <input type="submit" id="submit" value="Create" />
         <!-- <button type="submit" id="submit">Submit</button> -->
+        <span id="error" class="hidden"></span>
       </div>
     </form>
-
-    <ul>
+    <ul id="todo-list">
       {% for d in data: %}
       <li>{{d.description}}</li>
       {% endfor %}
