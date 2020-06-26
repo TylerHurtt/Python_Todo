@@ -6,6 +6,23 @@
     <title>Python_Todo</title>
   </head>
   <body>
+    <form action="/todos/create" method="post">
+      <div>
+        <label for="description">Create a Todo</label>
+      </div>
+      <div>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          placeholder="Enter a todo"
+        />
+
+        <input type="submit" id="submit" value="Create" />
+        <!-- <button type="submit" id="submit">Submit</button> -->
+      </div>
+    </form>
+
     <ul>
       {% for d in data: %}
       <li>{{d.description}}</li>
