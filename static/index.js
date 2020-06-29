@@ -3,30 +3,30 @@ const form = document.getElementById('form');
 form.onsubmit = function (e) {
   e.preventDefault();
   const todoDescription = document.getElementById('description').value;
-  // if (todoDescription != '') {
-  fetch('/todos/create', {
-    method: 'POST',
-    body: JSON.stringify({
-      description: todoDescription.toLowerCase(),
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      const listElement = document.createElement('li');
-      listElement.innerText = data.description;
-      document.getElementById('todo-list').appendChild(listElement);
-      document.getElementById('error').className = 'hidden';
-      document.getElementById('description').value = '';
+  if (todoDescription != '') {
+    fetch('/todos/create', {
+      method: 'POST',
+      body: JSON.stringify({
+        description: todoDescription.toLowerCase(),
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .catch((err) => {
-      const error = document.getElementById('error');
-      error.className = 'error';
-      error.innerHTML = JSON.stringify(err.message);
-    });
-  // }
+      .then((res) => res.json())
+      .then((data) => {
+        const listElement = document.createElement('li');
+        listElement.innerText = data.description;
+        document.getElementById('todo-list').appendChild(listElement);
+        document.getElementById('error').className = 'hidden';
+        document.getElementById('description').value = '';
+      })
+      .catch((err) => {
+        const error = document.getElementById('error');
+        error.className = 'error';
+        error.innerHTML = JSON.stringify(err.message);
+      });
+  }
 };
 
 // Checked-Box
