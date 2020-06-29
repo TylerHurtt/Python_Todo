@@ -26,7 +26,23 @@
     </form>
     <ul id="todo-list">
       {% for d in data: %}
-      <li>{{d.description}}</li>
+      <li>
+        <input
+          type="checkbox"
+          name="completed"
+          class="checkbox"
+          data-id="{{d.id}}"
+          {%
+          if
+          d.completed
+          %}
+          checked
+          {%
+          endif
+          %}
+        />
+        {{d.description}}
+      </li>
       {% endfor %}
     </ul>
   </body>
