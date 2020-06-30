@@ -1,3 +1,10 @@
+* {
+  font-size: 24px;
+}
+.flex {
+  display: flex;
+}
+
 .hidden {
   display: none;
 }
@@ -5,9 +12,53 @@
 .error {
   color: red;
 }
+#description {
+  margin-right: 10px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+}
+
+form {
+  margin-bottom: 10px;
+}
 
 #todo-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  width: -webkit-fill-available;
+}
+
+li {
+  clear: both;
+  margin-bottom: 5px;
+}
+
+.delete-btn {
+  -webkit-appearance: none;
+  background-color: inherit;
+  padding: 0;
+  border: none;
+  outline: none;
+  color: red;
+  float: right;
+  cursor: pointer;
+}
+.todo {
+  width: 88%;
+  overflow: visible;
+  height: fit-content;
+  word-break: break-all;
+  margin: 0;
+  display: inline-flex;
+}
+#label-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px 10px;
 }
