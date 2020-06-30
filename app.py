@@ -14,11 +14,25 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
+class TodoList(db.Model):
+    # Parent model
+    __tablename__ = 'todolists'
+    id = db.Column(db.Integer, nullable=False, primary_key=True)
+    name = db.Column(db.String(), nullable=False)
+    todos = db.relationship('Todo', backref='todolists')
+
+    def __repr__(self):
+        return f'<List{self.id} {self.name}>'
+
+
 class Todo(db.Model):
+    # Child model
     __tablename__ = 'todos'
     id = db.Column(db.Integer, nullable=False, primary_key=True)
     description = db.Column(db.String(), nullable=False)
     completed = db.Column(db.Boolean, nullable=False, default=False)
+    list_id = db.Column(db.Integer, nullable=False,
+                        foreign_key=('todolists.id'))
 
     def __repr__(self):
         return f'<Todo{self.id} {self.description}>'
