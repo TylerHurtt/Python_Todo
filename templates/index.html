@@ -8,42 +8,45 @@
   </head>
   <script type="text/javascript" src="../static/index.js" defer></script>
   <body>
-    <form id="form">
-      <div>
-        <label for="description">Create a Todo</label>
-      </div>
-      <div>
-        <input
-          type="text"
-          id="description"
-          name="description"
-          placeholder="Enter a todo"
-        />
-        <input type="submit" id="submit" value="Create" />
-        <!-- <button type="submit" id="submit">Submit</button> -->
-        <span id="error" class="hidden"></span>
-      </div>
-    </form>
-    <ul id="todo-list">
-      {% for d in data: %}
-      <li>
-        <input
-          type="checkbox"
-          name="completed"
-          class="checkbox"
-          data-id="{{d.id}}"
-          {%
-          if
-          d.completed
-          %}
-          checked
-          {%
-          endif
-          %}
-        />
-        {{d.description}}
-      </li>
-      {% endfor %}
-    </ul>
+    <div id="container">
+      <form id="form">
+        <div id="label-container">
+          <label for="description">Create a Todo</label>
+        </div>
+        <div class="flex">
+          <input
+            type="text"
+            id="description"
+            name="description"
+            placeholder="Enter a todo"
+          />
+          <input type="submit" id="submit" value="Create" />
+          <!-- <button type="submit" id="submit">Submit</button> -->
+          <span id="error" class="hidden"></span>
+        </div>
+      </form>
+      <ul id="todo-list">
+        {% for d in data: %}
+        <li id="li{{d.id}}">
+          <input
+            type="checkbox"
+            name="completed"
+            class="checkbox"
+            id="{{d.id}}"
+            {%
+            if
+            d.completed
+            %}
+            checked
+            {%
+            endif
+            %}
+          />
+          <p class="todo">{{d.description}}</p>
+          <button id="{{d.id}}" class="delete-btn">X</button>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </body>
 </html>
