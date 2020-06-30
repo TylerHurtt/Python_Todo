@@ -38,7 +38,10 @@ def create_todo():
         todo = Todo(description=description)
         db.session.add(todo)
         db.session.commit()
-        body['description'] = todo.description
+        body = {
+            'id': todo.id,
+            'description': todo.description
+        }
     except:
         db.session.rollback()
         error = True
@@ -59,6 +62,21 @@ def set_completed(todo_id):
         print('before', todo.completed)
         todo.completed = is_completed
         print('after', todo.completed)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        print(sys.exc_info())
+    finally:
+        db.session.close()
+    return redirect(url_for('index'))
+
+
+@app.route('/todos/<todo_id>/delete', methods=['DELETE'])
+def delete_todo(todo_id):
+    try:
+        todo = Todo.query.get(todo_id)
+        db.session.delete(todo)
+        print('deleted', todo)
         db.session.commit()
     except:
         db.session.rollback()
