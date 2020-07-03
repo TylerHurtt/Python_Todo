@@ -1,6 +1,7 @@
-* {
+html {
   font-size: 24px;
 }
+
 .flex {
   display: flex;
 }
@@ -15,13 +16,44 @@
 #description {
   margin-right: 10px;
 }
-
-#container {
+#outer-wrapper {
+  display: flex;
+  margin: 0 auto;
+  width: min-content;
+  align-items: flex-start;
+  border: 1px solid black;
+  background-color: lightgrey;
+  border: 5px solid darkslategrey;
+  border-radius: 1.6em;
+  padding: 10px;
+}
+a.list-name {
+  text-decoration: none;
+  color: black;
+}
+.list-name:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+.checkbox {
+  margin: 5px 10px 10px 0;
+  background-color: lightgray;
+}
+#lists-wrapper {
   display: flex;
   flex-direction: column;
   width: min-content;
+  margin: 0 20px 20px;
 }
-
+#todos-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  background-color: rgb(149, 211, 211);
+  padding: 50px;
+  border: 5px solid darkslategray;
+  border-radius: 1.6em;
+}
 form {
   margin-bottom: 10px;
 }
@@ -32,15 +64,34 @@ form {
   margin: 0;
   width: -webkit-fill-available;
 }
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+}
+#list-of-lists {
+  width: max-content;
+  max-width: 200px;
+}
+
+.selected {
+  font-weight: bold;
+}
 
 li {
   clear: both;
   margin-bottom: 5px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .delete-btn {
   -webkit-appearance: none;
   background-color: inherit;
+  margin: 3px 0 0 3px;
+
   padding: 0;
   border: none;
   outline: none;
@@ -52,13 +103,69 @@ li {
   width: 88%;
   overflow: visible;
   height: fit-content;
-  word-break: break-all;
+  word-break: break-word;
   margin: 0;
   display: inline-flex;
 }
-#label-container {
+#label-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 0 10px 10px;
+  justify-content: flex-end;
+  margin: 0 0px 10px 10px;
+}
+#rename-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+label h1 {
+  margin: 0;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.close-modal:hover,
+.close-modal:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-btn {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+#description {
+  margin: 0;
+  border-radius: 0.7em;
+  background-color: lightgray;
+  font-weight: bold;
+  padding: 5px;
+}
+#submit {
+  background-color: lightblue;
+  font-weight: bold;
+  border-radius: 0.5em;
+  padding: 2px 6px;
 }
