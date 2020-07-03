@@ -8,45 +8,137 @@
   </head>
   <script type="text/javascript" src="../static/index.js" defer></script>
   <body>
-    <div id="container">
-      <form id="form">
-        <div id="label-container">
-          <label for="description">Create a Todo</label>
+    <div id="outer-wrapper">
+      <div id="lists-wrapper">
+        <form id="add-list-form">
+          <!-- <input
+            type="text"
+            id="new-list"
+            name="new-list"
+            placeholder="Add a new list"
+          /> -->
+          <!-- The Modal -->
+          <div id="todolist-modal" class="modal" style="display: none;">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <h3>Add a new list!</h3>
+              <input
+                type="text"
+                id="new-list"
+                name="new-list"
+                placeholder="Add a new list"
+              />
+              <button class="close-modal">&times;</button>
+              <input id="new-todo-submit" value="submit" type="submit" />
+            </div>
+          </div>
+          <button id="add-list" class="modal-btn">Add a list</button>
+          <!-- <input id="add-list" value="Add List" type="submit" /> -->
+        </form>
+        <ul id="list-of-lists">
+          {% if not lists: %}
+          <li>No lists created</li>
+          {% endif %} {% for list in lists: %}
+          <li id="list{{list.id}}" class="list flex">
+            {% if selected.id == list.id: %}
+            <a
+              data-id="{{list.id}}"
+              class="list-name selected"
+              href="/todolist/{{list.id}}"
+            >
+              {{list.name}}
+            </a>
+            {% else %}
+            <a id="{{list.id}}" class="list-name" href="/todolist/{{list.id}}">
+              {{list.name}}
+            </a>
+            {% endif %}
+            <button
+              id="{{list.id}}"
+              name="list-delete-button"
+              class="delete-btn"
+            >
+              &Cross;
+            </button>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div id="todos-wrapper">
+        <div id="label-wrapper">
+          <label for="todo-list"><h1>{{selected.name}}</h1></label>
+        </div>
+        <div id="rename-wrapper">
+          <form id="rename-form" type="text">
+            <!-- The Modal -->
+            <div id="rename-list-modal" class="modal" style="display: none;">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <h3>Rename this list!</h3>
+                <input
+                  type="text"
+                  id="rename-input"
+                  placeholder="rename {{selected.name}} list"
+                />
+                <button id="rename-close" class="close-modal">&times;</button>
+                <input id="rename-submit" value="submit" type="submit" />
+              </div>
+            </div>
+            <!-- <input
+              type="text"
+              id="rename-input"
+              placeholder="Rename this list"
+              data-id="{{selected.id}}"
+            />
+            <input id="rename-submit" value="rename" type="submit" /> -->
+          </form>
+          <button id="rename-list" class="modal-btn">Rename list</button>
         </div>
         <div class="flex">
-          <input
-            type="text"
-            id="description"
-            name="description"
-            placeholder="Enter a todo"
-          />
-          <input type="submit" id="submit" value="Create" />
-          <!-- <button type="submit" id="submit">Submit</button> -->
-          <span id="error" class="hidden"></span>
+          <form id="form">
+            <input
+              type="text"
+              id="description"
+              name="description"
+              placeholder="Enter a todo"
+            />
+            <input type="submit" id="submit" value="Create" />
+            <!-- <button type="submit" id="submit">Submit</button> -->
+            <span id="error" class="hidden"></span>
+          </form>
         </div>
-      </form>
-      <ul id="todo-list">
-        {% for d in data: %}
-        <li id="li{{d.id}}">
-          <input
-            type="checkbox"
-            name="completed"
-            class="checkbox"
-            id="{{d.id}}"
-            {%
-            if
-            d.completed
-            %}
-            checked
-            {%
-            endif
-            %}
-          />
-          <p class="todo">{{d.description}}</p>
-          <button id="{{d.id}}" class="delete-btn">X</button>
-        </li>
-        {% endfor %}
-      </ul>
+        <ul id="todo-list">
+          <!-- {% if not todos %}
+          <p>Select a list or create a new one</p>
+          {% endif %}  -->
+
+          {% for todo in todos: %}
+          <li id="li{{todo.id}}" class="list-item">
+            <input
+              type="checkbox"
+              name="completed"
+              class="checkbox"
+              id="{{todo.id}}"
+              {%
+              if
+              todo.completed
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <p class="todo">{{todo.description}}</p>
+            <button id="{{todo.id}}" class="delete-btn">X</button>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if todos|length > 1: %}
+        <button id="check-all">check all</button>
+        {% else: %}
+        <button id="check-all" style="display: none;">check all</button>
+        {% endif %}
+      </div>
     </div>
   </body>
 </html>
